@@ -1,0 +1,222 @@
+body {
+    color: #ffffff;
+    background-size: cover;
+}
+
+.desktop {
+    position: absolute;
+    /* padding: 8px; */
+    height: calc(100vh - 32px);
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.icon {
+    width: 100px;
+    cursor: pointer;
+    margin: 8px 0;
+    padding: 5px;
+    border: 1px solid transparent;
+
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.icon img {
+    width: 54px;
+    display: block;
+    margin: 0 auto;
+}
+
+.icon .icon-name {
+    font-family: calibri, monospace;
+    font-size: 14px;
+    line-height: 20px;
+    height: 20px;
+    width: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.icon::selection {
+    background-color:transparent;
+} 
+
+.icon::-moz-selection {
+    background-color:transparent;
+}
+
+.selected {
+    background-color: #99D1FF99;
+    border-color: #99D1FF;
+}
+
+.recycle-bin {
+    position: absolute;
+    right: 8px;
+    bottom: 16px;
+}
+
+.title-bar img {
+    height: 18px;
+    transform: translateY(3px);
+}
+
+.menu-bar {
+    height: 21px;
+    font-size: 14px;
+    line-height: 20px;
+    color: black;
+    background-color: #E9EADA;
+    border-bottom: 1px solid #939498;
+    width: calc(100% - 4px);
+    margin: 0 2px;
+}
+
+.menu-bar span {
+    display: inline-block;
+    padding: 0 6px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.menu-bar span:hover {
+    background-color: #99D1FF77;
+    border-color: #99D1FF;
+}
+
+textarea {
+    outline: none;
+    width: calc(100% - 4px);
+    height: calc(100% - 50px);
+    margin: 0 2px;
+    border: none;
+    overflow: scroll;
+    resize: none;
+}
+
+.taskbar {
+    background-color: #245EDC;
+    background: linear-gradient(to bottom, #245EDC 0%, #3f8cf3 9%, #245EDC 18%, #245EDC 92%, #1941A5 100%) center/cover no-repeat;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 32px;
+}
+
+.start-button {
+    height: 100%;
+    float: left;
+    font-size: 22px;
+    line-height: 22px;
+    font-weight: bold;
+    font-style: italic;
+    background: radial-gradient(circle, #5eac56 0%, #3c873c 100%) center/cover no-repeat;
+    box-shadow: 0px 5px 10px #79ce71 inset, 4px 0 8px #3f8cf3;
+    padding: 2px 25px 6px 10px;
+    text-shadow: 1px 1px 3px #222;
+    border-radius: 0px 8px 8px 0px;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+.start-button img {
+    height: 20px;
+    filter: drop-shadow(1px 1px 1px #222);
+    transform: translateY(4px);
+}
+
+.opened-tabs {
+    width: calc(100% - 225px);
+    float: left;
+}
+
+.open-tab {
+    width: 150px;
+    height: 26px;
+    margin: 3px 0;
+    float: left;
+    background-color: #4892F7;
+    background: url(btn1.png) no-repeat 0 0;
+    border: 1px solid #306FD9;
+    border-radius: 2px;
+    font-family: calibri, monospace;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.open-tab:hover {
+    background: url(btn2.png) no-repeat 0 0;
+}
+
+.open-tab.active {
+    background: url(btn3.png) no-repeat 0 0;
+}
+
+.open-tab img {
+    height: 18px;
+    float: left;
+    transform: translateY(-3px);
+    margin-right: 5px;
+}
+
+.time {
+    height: 100%;
+    float: right;
+    font-size: 14px;
+    line-height: 14px;
+    background: linear-gradient(to bottom, #1290E9 0%, #19B9F3 9%, #1290E9 18%, #1290E9 92%, #1941A5 100%) center/cover no-repeat;
+    box-shadow: 0px 5px 10px #14A5F0 inset, 0px 5px 10px #333333;
+    padding: 9px 15px 9px 25px;
+    border-left: 1px solid #092E51;
+    text-shadow: 1px 1px 2px #222;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+@media (orientation: landscape) {
+    body {
+        background-position: center bottom;
+        background-image: url('desktop-bg.jpg');
+    }
+}
+
+@media (orientation: portrait) {
+    body {
+        background-image: url('desktop-bg-portrait.jpg');
+    }
+}
+
+@media screen and (max-width:825px) {
+    .open-tab:nth-child(3) {
+        display: none;
+    }
+}
+
+@media screen and (max-width:675px) {
+    .open-tab:nth-child(1) {
+        display: none;
+    }
+}
+
+@media screen and (max-width:525px) {
+    .open-tab:nth-child(2) {
+        display: none;
+    }
+}
