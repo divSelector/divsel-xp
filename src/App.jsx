@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Window from './components/Window';
 import Taskbar from './components/Taskbar';
+import CmdPrompt from './components/CmdPrompt';
 import DocumentsIcon from './assets/documents.png'
 
 function App() {
@@ -159,8 +160,8 @@ function App() {
         newWindowPositions[newWindowId] = { x: randomX, y: randomY };
 
         setWindowPositions(newWindowPositions);
-        console.log(Object.keys(windowPositions).length)
-      }, 5000); // 10000 milliseconds = 10 seconds
+
+      }, 1400); // 10000 milliseconds = 10 seconds
 
       return () => {
         clearInterval(interval);
@@ -168,17 +169,19 @@ function App() {
     }
   }, [closedAllPopups, windowPositions]);
 
-
   return (
     <div className="desktop">
       <div className="icon">
             <img src={DocumentsIcon} />
             <div className="icon-name">My Documents</div>
       </div>
+
+      <CmdPrompt />
+      
       {Object.keys(windowPositions).map((key) => (
         <Window
           key={key}
-          id={"window"+key}
+          id={"popup-window"+key}
           initialPosition={windowPositions[key]}
           initialWidth={300}
           popupMessage={getRandomHackerMessage()}

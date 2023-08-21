@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
+import AlertIcon from '../assets/alert.png'
 
 export default function Window({ popupMessage, popupTitle, initialPosition, initialWidth = 300, id }) {
-  const [storedPopupMessage, setStoredPopupMessage] = useState(popupMessage)
+  const [storedPopupMessage, _] = useState(popupMessage)
   const [isOpen, setIsOpen] = useState(true);
   const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-
+  const [isMaximized, setIsMaximized] = useState(false);
 
   const handleMouseDownWindow = (e) => {
     raiseZIndexOfWindow();
@@ -23,7 +24,7 @@ export default function Window({ popupMessage, popupTitle, initialPosition, init
     });
   };
 
-  const raiseZIndexOfWindow = () => {
+  const getHighestZIndexOfWindow = () => {
     const highestZIndex = [...document.querySelectorAll('.window')].reduce(
       (maxZIndex, windowElement) => {
         const zIndexValue = parseInt(windowElement.style.zIndex, 10);
@@ -31,6 +32,11 @@ export default function Window({ popupMessage, popupTitle, initialPosition, init
       },
       0
     );
+    return highestZIndex
+  }
+
+  const raiseZIndexOfWindow = () => {
+    const highestZIndex = getHighestZIndexOfWindow()
 
     setZIndex(highestZIndex + 1);
   }
@@ -38,14 +44,31 @@ export default function Window({ popupMessage, popupTitle, initialPosition, init
   const handleMouseMoveWindow = (e) => {
     if (!isDragging) return;
     setPosition({
-      x: e.clientX - dragOffset.x,
-      y: e.clientY - dragOffset.y,
+      x: Math.max(Math.min(e.clientX - dragOffset.x, window.innerWidth - 300), 0),
+      y: Math.max(Math.min(e.clientY - dragOffset.y, window.innerHeight - 100), 0),
     });
   };
 
   const handleMouseUpWindow = () => {
     setIsDragging(false);
   };
+
+  const maximizeWindow = (e) => {
+    const eventWindow = e.target.parentElement.parentElement.parentElement
+    if (isMaximized) {
+        eventWindow.style.height = "unset"
+        eventWindow.style.width = "300px"
+        setPosition({x: 0, y: 0})
+        setIsMaximized(false)
+
+    } else {
+        eventWindow.style.height = "100%"
+        eventWindow.style.width = "100%"
+        setPosition({x: 0, y: 0})
+        setIsMaximized(true)
+    }
+    
+  }
 
   const minimizeWindow = (e) => {
     // Make Minimized Window Hidden
@@ -57,7 +80,10 @@ export default function Window({ popupMessage, popupTitle, initialPosition, init
     const minTab = document.createElement('div');
     minTab.className = 'open-tab';
     minTab.setAttribute('data-window-id', eventWindow.id);
+    const iconImg = document.createElement('img');
+    iconImg.src = AlertIcon
     const textNode = document.createTextNode(titleBar.innerHTML);
+    minTab.appendChild(iconImg);
     minTab.appendChild(textNode);
 
       // Add an onClick handler to the minimized tab
@@ -110,7 +136,7 @@ export default function Window({ popupMessage, popupTitle, initialPosition, init
           <div className="title-bar-text">{popupTitle}</div>
           <div className="title-bar-controls">
             <button aria-label="Minimize" onMouseUp={minimizeWindow} />
-            <button aria-label="Maximize" />
+            <button aria-label="Maximize" onMouseUp={maximizeWindow} />
             <button aria-label="Close" onMouseUp={()=>setIsOpen(false)} />
           </div>
         </div>

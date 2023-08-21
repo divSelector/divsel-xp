@@ -78,6 +78,19 @@ body {
     border-color: #99D1FF;
 }
 
+#command-prompt {
+    height: 300px;
+}
+
+
+#command-prompt > .window-body {
+    height: inherit;
+}
+
+#command-prompt > .window-body > pre {
+    height: inherit;
+}
+
 .recycle-bin {
     position: absolute;
     right: 8px;
