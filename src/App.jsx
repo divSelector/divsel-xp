@@ -3,12 +3,15 @@ import Window from './components/Window';
 import Taskbar from './components/Taskbar';
 import CmdPrompt from './components/CmdPrompt';
 import DocumentsIcon from './assets/documents.png'
+import CommandIcon from './assets/cmd.png'
 
 function App() {
   const [windowPositions, setWindowPositions] = useState([]);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [closedAllPopups, setClosedAllPopups] = useState(false);
+
+  const [showCmdPrompt, setShowCmdPrompt] = useState(true);
 
 
   function getRandomHackerMessage() {
@@ -140,6 +143,7 @@ function App() {
 
   useEffect(() => {
     calculateInitialPositions()
+    
   }, [])
 
   useEffect(() => {
@@ -171,13 +175,18 @@ function App() {
 
   return (
     <div className="desktop">
-      <div className="icon">
+      <div onClick={() => alert("Sorry, your files were deleted.")} className="icon">
             <img src={DocumentsIcon} />
             <div className="icon-name">My Documents</div>
       </div>
+      <div onClick={() => setShowCmdPrompt(true)} className="icon">
+            <img src={CommandIcon} />
+            <div className="icon-name">Command Prompt</div>
+      </div>
 
-      <CmdPrompt />
-      
+
+      {showCmdPrompt && <CmdPrompt initialWidth={500} setShowCmdPrompt={setShowCmdPrompt} />}
+
       {Object.keys(windowPositions).map((key) => (
         <Window
           key={key}

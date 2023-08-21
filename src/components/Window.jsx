@@ -120,7 +120,7 @@ export default function Window({ popupMessage, popupTitle, initialPosition, init
     <>
       <div
         id={id}
-        className="window"
+        className="popup window"
         style={{
           position: 'absolute',
           left: position.x,

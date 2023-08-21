@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import CommandIcon from '../assets/cmd.png'
 
-export default function CmdPrompt(initialPosition, initialWidth = 500) {
-    const [isOpen, setIsOpen] = useState(true);
+export default function CmdPrompt({setShowCmdPrompt}) {
     const [position, setPosition] = useState({ x: 200, y: 50 });
     const [isDragging, setIsDragging] = useState(false);
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -40,12 +39,14 @@ export default function CmdPrompt(initialPosition, initialWidth = 500) {
         if (isMaximized) {
             eventWindow.style.height = "300px"
             eventWindow.style.width = "unset"
+            eventWindow.style.maxWidth = "600px"
             setPosition({x: 0, y: 0})
             setIsMaximized(false)
 
         } else {
             eventWindow.style.height = "100%"
             eventWindow.style.width = "100%"
+            eventWindow.style.maxWidth = "unset"
             setPosition({x: 0, y: 0})
             setIsMaximized(true)
         }
@@ -100,7 +101,7 @@ export default function CmdPrompt(initialPosition, initialWidth = 500) {
         };
       }, [isDragging]);
 
-    return isOpen && (
+    return  (
         <>
       <div
         id="command-prompt"
@@ -109,7 +110,6 @@ export default function CmdPrompt(initialPosition, initialWidth = 500) {
           position: 'absolute',
           left: position.x,
           top: position.y,
-          width: initialWidth,
         }}
         onMouseMove={handleMouseMoveWindow}
         onMouseUp={handleMouseUpWindow}
@@ -120,13 +120,13 @@ export default function CmdPrompt(initialPosition, initialWidth = 500) {
           <div className="title-bar-controls">
             <button aria-label="Minimize" onMouseUp={minimizeWindow} />
             <button aria-label="Maximize" onMouseUp={maximizeWindow} />
-            <button aria-label="Close" onMouseUp={()=>setIsOpen(false)} />
+            <button aria-label="Close" onMouseUp={()=>setShowCmdPrompt(false)} />
           </div>
         </div>
             <div className="window-body">
                 <pre>Microsoft&#10094;R&#10095; Windows DOS 
                         &#10094;C&#10095; Copyright Microsoft Corp 1990-2001.
-                <br />C:&#92;WINDOWS&#92;SYSTEM32 &gt; Listen, they say if you close all the windows...
+                <br />C:&#92;WINDOWS&#92;SYSTEM32 &gt; Listen, they say if you close all the windows...df das dasf ds fas fdas fdsfa s ds fds das dsaf das df ads fdas dfasf ds dfsaf dads fas fdas 
                 </pre>
             </div>
             </div>
