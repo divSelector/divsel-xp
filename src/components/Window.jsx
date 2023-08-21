@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function Window({ popupMessage, popupTitle, initialPosition, initialWidth = 300, id }) {
-  const [count, setCount] = useState(0);
+  const [storedPopupMessage, setStoredPopupMessage] = useState(popupMessage)
   const [isOpen, setIsOpen] = useState(true);
   const [position, setPosition] = useState(initialPosition || { x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(1);
@@ -116,7 +116,7 @@ export default function Window({ popupMessage, popupTitle, initialPosition, init
         </div>
 
         <div className="window-body">
-          <p style={{ textAlign: "center" }}>{popupMessage}</p>
+          <p style={{ textAlign: "center" }}>{storedPopupMessage}</p>
           <div className="field-row" style={{ justifyContent: "center" }}>
             {/* <button onClick={() => setCount(count + 1)}>+</button>
             <button onClick={() => setCount(count - 1)}>-</button> */}

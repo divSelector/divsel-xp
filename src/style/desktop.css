@@ -1,11 +1,30 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+
+    box-sizing: border-box;
+  }
+
 body {
-    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    background-image: url('windows-xp-wallpaper-bliss.png');
     background-size: cover;
-}
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Ensures the background covers the full viewport height */
+  }
+
 
 .desktop {
     position: absolute;
-    /* padding: 8px; */
+    padding: 18px;
     height: calc(100vh - 32px);
     width: 100vw;
     overflow: hidden;
@@ -21,7 +40,6 @@ body {
     margin: 8px 0;
     padding: 5px;
     border: 1px solid transparent;
-
     -webkit-user-select: none;
     -moz-user-select: -moz-none;
     -ms-user-select: none;
@@ -36,8 +54,8 @@ body {
 }
 
 .icon .icon-name {
-    font-family: calibri, monospace;
-    font-size: 14px;
+    /* font-family: calibri, monospace; */
+    /* font-size: 14px; */
     line-height: 20px;
     height: 20px;
     width: 90px;
@@ -112,6 +130,7 @@ textarea {
     left: 0;
     width: 100%;
     height: 32px;
+    color: #fff;
 }
 
 .start-button {
@@ -193,15 +212,10 @@ textarea {
 @media (orientation: landscape) {
     body {
         background-position: center bottom;
-        background-image: url('desktop-bg.jpg');
     }
 }
 
-@media (orientation: portrait) {
-    body {
-        background-image: url('desktop-bg-portrait.jpg');
-    }
-}
+
 
 @media screen and (max-width:825px) {
     .open-tab:nth-child(3) {

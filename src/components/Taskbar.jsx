@@ -1,4 +1,3 @@
-import '../style/desktop.css';
 import StartLogo from '../assets/logo.svg'
 import DocumentsIcon from '../assets/documents.png'
 import ComputerIcon from '../assets/computer.png'
