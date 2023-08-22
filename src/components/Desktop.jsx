@@ -24,7 +24,7 @@ export default function Desktop() {
 
       <CmdPrompt isOpen={showCmdPrompt} setIsOpen={setShowCmdPrompt} />
 
-      <EndlessPopups startAt={8} perMiliSec={700} endAt={100} />
+      <EndlessPopups startAt={8} perMiliSec={900} endAt={100} />
 
       <Taskbar />
     </div>

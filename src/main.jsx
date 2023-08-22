@@ -11,7 +11,6 @@ function preload(imageUrls, callback) {
   let loadedImages = 0;
 
   imageUrls.forEach(url => {
-    console.log(url)
     const img = document.createElement('img');
     img.style.display = 'none';
     img.src = url
@@ -22,6 +21,7 @@ function preload(imageUrls, callback) {
       document.body.removeChild(img);
 
       if (loadedImages === imageUrls.length) {
+        document.body.style.backgroundImage = `url(${backgroundImages[1]})`
         callback();
       }
     };
