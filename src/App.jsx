@@ -192,7 +192,6 @@ function App() {
           key={key}
           id={"popup-window"+key}
           initialPosition={windowPositions[key]}
-          initialWidth={300}
           popupMessage={getRandomHackerMessage()}
           popupTitle="Hello :)"
         />
