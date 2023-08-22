@@ -1,14 +1,16 @@
 // WindowContainer.js
 import React from 'react';
 
-const Window = ({ 
-  dragMouseDownTitleBar, dragMouseDownWindow, 
-  dragMouseUpWindow, dragMouseMoveWindow, 
-  maximizeWindow, minimizeWindow, 
+const Window = ({
+  id,
+  dragMouseDownTitleBar, dragMouseDownWindow,
+  dragMouseUpWindow, dragMouseMoveWindow,
+  maximizeWindow, minimizeWindow,
   windowTitle, windowStyle, setIsOpen,
-  children 
+  children
 }) => (
   <div
+    id={id}
     className="window"
     style={windowStyle}
     onMouseMove={dragMouseMoveWindow}

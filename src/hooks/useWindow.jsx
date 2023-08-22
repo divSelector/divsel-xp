@@ -4,7 +4,10 @@ import useDrag from './useDrag';
 import useMaximize from './useMaximize';
 import useMinimize from './useMinimize';
 
-export function useWindow({initialPosition, windowSize, shouldRaiseZIndex, iconImg}) {
+export function useWindow({
+  initialPosition, windowSize,
+  shouldRaiseZIndex, iconImg
+}) {
   const [isOpen, setIsOpen] = useState(true);
 
   const windowOptions = {
@@ -23,7 +26,9 @@ export function useWindow({initialPosition, windowSize, shouldRaiseZIndex, iconI
     dragMouseMoveWindow,
   } = useDrag(windowOptions);
 
-  const { maximizeWindow } = useMaximize({ position, setPosition, windowSize });
+  const { maximizeWindow } = useMaximize({ 
+    position, setPosition, windowSize 
+  });
   const { minimizeWindow } = useMinimize(iconImg);
 
   return {
