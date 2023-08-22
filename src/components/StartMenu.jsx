@@ -1,4 +1,4 @@
-import { assets } from "../assets/manifest"
+import { assets } from "../manifest"
 
 export default function StartMenu({ setStartMenuOpen }) {
 

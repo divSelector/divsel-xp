@@ -6,7 +6,7 @@ import './style/welcome.css';
 import './style/loading.css';
 import './style/startmenu.css';
 import "xp.css/dist/XP.css";
-import { backgroundImages, assets } from './assets/manifest.jsx';
+import { backgroundImages, assets } from './manifest.jsx';
 
 function preload(imageUrls, callback) {
   let loadedImages = 0;
