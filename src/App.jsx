@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Window from './components/windows/AlertPopup';
 import Taskbar from './components/Taskbar';
 import CmdPrompt from './components/windows/CmdPrompt';
 import DocumentsIcon from './assets/documents.png'
