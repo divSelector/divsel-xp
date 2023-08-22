@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import AlertPopup from "../windows/AlertPopup";
 import { getRandomHackerMessage } from "../../data/dialog";
+import { useNavigate } from "react-router-dom";
 
 export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
     const [windowPositions, setWindowPositions] = useState([]);
     const [closedAllPopups, setClosedAllPopups] = useState(false);
+
+    const navigate = useNavigate()
 
     const checkIfAllPopupsClosed = () => {
         let popups = document.querySelectorAll('.desktop > .window');
@@ -47,7 +50,8 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
 
                 // TODO FAILURE
                 console.log("FAILURE")
-                setClosedAllPopups(true)
+                setWindowPositions([])
+                navigate('/xp/gameover')
             }
 
             const interval = setInterval(() => {
