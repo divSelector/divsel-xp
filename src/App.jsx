@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Window from './components/Window';
+import Window from './components/windows/AlertPopup';
 import Taskbar from './components/Taskbar';
-import CmdPrompt from './components/CmdPrompt';
+import CmdPrompt from './components/windows/CmdPrompt';
 import DocumentsIcon from './assets/documents.png'
 import CommandIcon from './assets/cmd.png'
+import AlertPopup from './components/windows/AlertPopup';
 
 function App() {
   const [windowPositions, setWindowPositions] = useState([]);
@@ -185,15 +186,15 @@ function App() {
       </div>
 
 
-      {showCmdPrompt && <CmdPrompt initialWidth={500} setShowCmdPrompt={setShowCmdPrompt} />}
+      <CmdPrompt isOpen={showCmdPrompt}  setIsOpen={setShowCmdPrompt} />
 
       {Object.keys(windowPositions).map((key) => (
-        <Window
+        <AlertPopup
           key={key}
           id={"popup-window"+key}
           initialPosition={windowPositions[key]}
-          popupMessage={getRandomHackerMessage()}
-          popupTitle="Hello :)"
+          windowMessage={getRandomHackerMessage()}
+          windowTitle="Hello :)"
         />
       ))}
 

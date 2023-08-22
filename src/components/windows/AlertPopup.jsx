@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import alertIcon from '../assets/alert.png'
-import useDrag from '../hooks/useDrag';
-import useMaximize from '../hooks/useMaximize';
-import useMinimize from '../hooks/useMinimize';
+import useDrag from '../../hooks/useDrag';
+import useMaximize from '../../hooks/useMaximize';
+import useMinimize from '../../hooks/useMinimize';
 
-export default function Window({ popupMessage, popupTitle, initialPosition, id }) {
-  const [storedPopupMessage, _] = useState(popupMessage)
+export default function AlertPopup({ windowMessage, windowTitle, initialPosition, id }) {
+  const [storedPopupMessage, _] = useState(windowMessage)
   const [isOpen, setIsOpen] = useState(true);
 
   const windowSize = { x: 300, y:100 }
@@ -22,8 +22,8 @@ export default function Window({ popupMessage, popupTitle, initialPosition, id }
 
   const { minimizeWindow } = useMinimize(alertIcon)
 
-  return isOpen && (
-    <>
+  return (
+    isOpen && <>
       <div
         id={id}
         className="window"
@@ -39,7 +39,7 @@ export default function Window({ popupMessage, popupTitle, initialPosition, id }
         onMouseDown={dragMouseDownWindow}
       >
         <div className="title-bar" onMouseDown={dragMouseDownTitleBar}>
-          <div className="title-bar-text">{popupTitle}</div>
+          <div className="title-bar-text">{windowTitle}</div>
           <div className="title-bar-controls">
             <button aria-label="Minimize" onMouseUp={minimizeWindow} />
             <button aria-label="Maximize" onMouseUp={maximizeWindow} />
@@ -50,8 +50,6 @@ export default function Window({ popupMessage, popupTitle, initialPosition, id }
         <div className="window-body">
           <p style={{ textAlign: "center" }}>{storedPopupMessage}</p>
           <div className="field-row" style={{ justifyContent: "center" }}>
-            {/* <button onClick={() => setCount(count + 1)}>+</button>
-            <button onClick={() => setCount(count - 1)}>-</button> */}
             <button onClick={() => setIsOpen(false)}>Ok</button>
           </div>
         </div>

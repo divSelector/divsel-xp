@@ -1,9 +1,9 @@
 import commandIcon from '../assets/cmd.png'
-import useDrag from "../hooks/useDrag";
-import useMaximize from "../hooks/useMaximize";
-import useMinimize from '../hooks/useMinimize';
+import useDrag from "../../hooks/useDrag";
+import useMaximize from "../../hooks/useMaximize";
+import useMinimize from '../../hooks/useMinimize';
 
-export default function CmdPrompt({ setShowCmdPrompt }) {
+export default function CmdPrompt({ isOpen, setIsOpen }) {
 
     const windowSize = { x: 600, y: 300 }
     const windowOptions = {
@@ -23,7 +23,7 @@ export default function CmdPrompt({ setShowCmdPrompt }) {
     const { minimizeWindow } = useMinimize(commandIcon)
 
     return (
-        <>
+        isOpen && <>
             <div
                 id="command-prompt"
                 className="window"
@@ -41,7 +41,7 @@ export default function CmdPrompt({ setShowCmdPrompt }) {
                     <div className="title-bar-controls">
                         <button aria-label="Minimize" onMouseUp={minimizeWindow} />
                         <button aria-label="Maximize" onMouseUp={maximizeWindow} />
-                        <button aria-label="Close" onMouseUp={() => setShowCmdPrompt(false)} />
+                        <button aria-label="Close" onMouseUp={() => setIsOpen(false)} />
                     </div>
                 </div>
                 <div className="window-body">
