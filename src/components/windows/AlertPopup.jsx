@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import alertIcon from '../assets/alert.png'
+import alertIcon from '../../assets/alert.png'
 import useDrag from '../../hooks/useDrag';
 import useMaximize from '../../hooks/useMaximize';
 import useMinimize from '../../hooks/useMinimize';

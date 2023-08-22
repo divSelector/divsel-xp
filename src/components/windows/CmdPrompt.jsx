@@ -1,4 +1,4 @@
-import commandIcon from '../assets/cmd.png'
+import commandIcon from '../../assets/cmd.png'
 import useDrag from "../../hooks/useDrag";
 import useMaximize from "../../hooks/useMaximize";
 import useMinimize from '../../hooks/useMinimize';
