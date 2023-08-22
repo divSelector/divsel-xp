@@ -1,4 +1,3 @@
-// useWindow.js
 import { useState } from 'react';
 import useDrag from './useDrag';
 import useMaximize from './useMaximize';
@@ -31,16 +30,22 @@ export function useWindow({
   });
   const { minimizeWindow } = useMinimize(iconImg);
 
+  const commonWindowProps = {
+    position, 
+    zIndex, 
+    dragMouseDownTitleBar,
+    dragMouseDownWindow, 
+    dragMouseUpWindow, 
+    dragMouseMoveWindow,
+    minimizeWindow,
+    maximizeWindow
+  }
+
   return {
     isOpen,
     setIsOpen,
     position,
     zIndex,
-    dragMouseDownTitleBar,
-    dragMouseDownWindow,
-    dragMouseUpWindow,
-    dragMouseMoveWindow,
-    maximizeWindow,
-    minimizeWindow,
+    commonWindowProps
   };
 }

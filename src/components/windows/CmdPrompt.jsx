@@ -15,9 +15,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         iconImg: commandIcon
     }
 
-    const { position, zIndex, dragMouseDownTitleBar, dragMouseDownWindow,
-        dragMouseUpWindow, dragMouseMoveWindow, maximizeWindow,
-        minimizeWindow } = useWindow(windowOptions);
+    const { position, commonWindowProps } = useWindow(windowOptions);
 
     const windowStyle = {
         position: 'absolute',
@@ -30,17 +28,10 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         isOpen && <>
             <Window
                 id="command-prompt"
-                position={position}
-                zIndex={zIndex}
-                dragMouseDownTitleBar={dragMouseDownTitleBar}
-                dragMouseDownWindow={dragMouseDownWindow}
-                dragMouseUpWindow={dragMouseUpWindow}
-                dragMouseMoveWindow={dragMouseMoveWindow}
-                maximizeWindow={maximizeWindow}
-                minimizeWindow={minimizeWindow}
                 windowTitle="Command Prompt"
                 windowStyle={windowStyle}
                 setIsOpen={setIsOpen}
+                {...commonWindowProps}
             >
                 <pre>Microsoft&#10094;R&#10095; Windows DOS
                     &#10094;C&#10095; Copyright Microsoft Corp 1990-2001.
