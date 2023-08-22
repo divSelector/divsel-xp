@@ -1,7 +1,5 @@
 import commandIcon from '../../assets/cmd.png'
-import useDrag from "../../hooks/useDrag";
-import useMaximize from "../../hooks/useMaximize";
-import useMinimize from '../../hooks/useMinimize';
+import { useWindow } from '../../hooks/useWindow';
 
 export default function CmdPrompt({ isOpen, setIsOpen }) {
 
@@ -12,15 +10,13 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             y: 50
         },
         windowSize,
-        shouldRaiseZIndex: false
+        shouldRaiseZIndex: false,
+        iconImg: commandIcon
     }
 
-    const { position, setPosition, dragMouseDownTitleBar,
-        dragMouseDownWindow, dragMouseUpWindow, dragMouseMoveWindow } = useDrag(windowOptions)
-
-    const { maximizeWindow } = useMaximize({ position, setPosition, windowSize })
-
-    const { minimizeWindow } = useMinimize(commandIcon)
+    const { position, zIndex, dragMouseDownTitleBar, dragMouseDownWindow, 
+        dragMouseUpWindow, dragMouseMoveWindow, maximizeWindow, 
+        minimizeWindow } = useWindow(windowOptions);
 
     return (
         isOpen && <>

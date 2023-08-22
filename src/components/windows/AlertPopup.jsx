@@ -1,26 +1,21 @@
 import { useState } from 'react';
 import alertIcon from '../../assets/alert.png'
-import useDrag from '../../hooks/useDrag';
-import useMaximize from '../../hooks/useMaximize';
-import useMinimize from '../../hooks/useMinimize';
+import { useWindow } from '../../hooks/useWindow';
 
 export default function AlertPopup({ windowMessage, windowTitle, initialPosition, id }) {
   const [storedPopupMessage, _] = useState(windowMessage)
-  const [isOpen, setIsOpen] = useState(true);
 
   const windowSize = { x: 300, y:100 }
   const windowOptions = {
     initialPosition,
     windowSize,
-    shouldRaiseZIndex: true
+    shouldRaiseZIndex: true,
+    iconImg: alertIcon
   }
   
-  const { position, setPosition, zIndex, dragMouseDownTitleBar, 
-          dragMouseDownWindow, dragMouseUpWindow, dragMouseMoveWindow } = useDrag(windowOptions)
-
-  const { maximizeWindow } = useMaximize({ position, setPosition, windowSize })
-
-  const { minimizeWindow } = useMinimize(alertIcon)
+  const { isOpen, setIsOpen, position, zIndex, dragMouseDownTitleBar, 
+    dragMouseDownWindow, dragMouseUpWindow, dragMouseMoveWindow, 
+    maximizeWindow, minimizeWindow } = useWindow(windowOptions);
 
   return (
     isOpen && <>
