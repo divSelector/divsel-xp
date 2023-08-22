@@ -36,6 +36,5 @@ export const assets = {
     "sound": "/xp/sound.png",
     "turnoff": "/xp/turnoff.png",
     "user": "/xp/user.png",
-    "winPlayer": "/xp/winPlayer.png",
-    "programs": "programs.ico"
+    "winPlayer": "/xp/winPlayer.png"
 }

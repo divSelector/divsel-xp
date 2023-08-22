@@ -1,0 +1,117 @@
+:root {
+    --azul-janela: #0055ea;
+    --azul: #225ad9;
+    --azul-claro: #3980f4;
+    --azul-notification: #1188e5;
+    --bege: #ece9d8;
+}
+
+#menu {
+    position: absolute;
+    display: none;
+    bottom: 0px;
+    left: 1px;
+    border: 3px solid var(--azul-janela);
+    border-radius: 5px;
+    z-index: 99999999999999;
+}
+
+#menu:hover,
+#menu,
+#menuFirstColumn,
+#menuLastColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+#menu > div,
+#menuFirstColumn > label,
+#menuFirstColumn > div,
+#menuLastColumn > label,
+#menuLastColumn > div,
+#menuSystem,
+#menuSystem > div {
+    display: flex;
+}
+
+#menu img {
+    height: 27px;
+}
+
+#menu #avatar {
+    background-color: var(--azul);
+    padding: 5px;
+    gap: 10px;
+    align-items: center;
+}
+
+#menu #avatar p {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#menu #avatar img {
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+#menu #menuColumns {
+    width: 95vw;
+    max-width: 400px;
+}
+
+#menu #menuColumns > div {
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+#menu #menuColumns div div,
+#menu #menuColumns div label,
+#menu #menuColumns div a {
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    padding: 1px;
+}
+
+#menu #menuColumns div div:hover,
+#menu #menuColumns div label:hover,
+#menu #menuColumns div a:hover {
+    color: white;
+    background-color: var(--azul);
+}
+
+#menu #menuColumns #menuFirstColumn {
+    background-color: white;
+}
+
+#menu #menuColumns #menuLastColumn {
+    background-color: #d3e5fa;
+}
+
+#menu #menuColumns #menuFirstColumn #allPrograms {
+    justify-content: center;
+    font-weight: bold;
+}
+
+#menu #menuSystem {
+    background-color: var(--azul);
+    justify-content: end;
+    gap: 10px;
+    padding: 10px;
+}
+
+#menu #menuSystem div {
+    align-items: center;
+    color: white;
+    gap: 5px;
+    padding: 1px;
+    cursor: pointer;
+}
+
+#menu #menuSystem div:hover {
+    text-shadow: 5px 5px 10px var(--bege);
+}

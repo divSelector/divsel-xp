@@ -1,14 +1,26 @@
+import { useEffect } from 'react';
 import StartLogo from '../assets/logo.svg'
-import DocumentsIcon from '../assets/documents.png'
-import ComputerIcon from '../assets/computer.png'
-import NetworkIcon from '../assets/network.png'
-import NotepadIcon from '../assets/notepad.png'
 
-export default function Taskbar() {
+export default function Taskbar({ startMenuOpen, setStartMenuOpen }) {
+
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //       if (startMenuOpen && event.target.closest('#menu')) {
+    //         setStartMenuOpen(false);
+    //       }
+    //     };
+    
+    //     document.addEventListener('click', handleClickOutside);
+    
+    //     return () => {
+    //       document.removeEventListener('click', handleClickOutside);
+    //     };
+    //   }, [startMenuOpen]);
+
     return (
         <>
-            <div className="taskbar">
-                <div className="start-button"><img src={StartLogo} /> start</div>
+            <div className="taskbar" onMouseLeave={() => setStartMenuOpen(false)}>
+                <div className="start-button" onClick={()=>setStartMenuOpen(!startMenuOpen)}><img src={StartLogo} /> start</div>
                 <div className="opened-tabs">
                     {/* <div className="open-tab"><img src={DocumentsIcon} /> dsfdsfds</div> */}
                     {/* <div className="open-tab"><img src={ComputerIcon} /> My Computer</div>

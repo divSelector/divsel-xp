@@ -4,9 +4,11 @@ import CmdPrompt from './windows/CmdPrompt';
 import DocumentsIcon from '../assets/documents.png'
 import CommandIcon from '../assets/cmd.png'
 import EndlessPopups from './scenarios/EndlessPopups';
+import StartMenu from './StartMenu';
 
 export default function Desktop() {
 
+  const [startMenuOpen, setStartMenuOpen] = useState(false)
   const [showCmdPrompt, setShowCmdPrompt] = useState(true);
 
   return (
@@ -22,11 +24,13 @@ export default function Desktop() {
         </div>
       </div>
 
+      {startMenuOpen && <StartMenu setStartMenuOpen={setStartMenuOpen} />}
+
       <CmdPrompt isOpen={showCmdPrompt} setIsOpen={setShowCmdPrompt} />
 
-      <EndlessPopups startAt={8} perMiliSec={900} endAt={100} />
+      {/* <EndlessPopups startAt={8} perMiliSec={900} endAt={100} /> */}
 
-      <Taskbar />
+      <Taskbar startMenuOpen={startMenuOpen} setStartMenuOpen={setStartMenuOpen} />
     </div>
   );
 }

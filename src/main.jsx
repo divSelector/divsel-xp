@@ -4,8 +4,9 @@ import Root from './Root.jsx'
 import './style/desktop.css';
 import './style/welcome.css';
 import './style/loading.css';
+import './style/startmenu.css';
 import "xp.css/dist/XP.css";
-import { backgroundImages } from './assets/manifest.jsx';
+import { backgroundImages, assets } from './assets/manifest.jsx';
 
 function preload(imageUrls, callback) {
   let loadedImages = 0;
@@ -30,7 +31,7 @@ function preload(imageUrls, callback) {
   });
 }
 
-preload(backgroundImages, () => {
+preload(backgroundImages.concat(Object.values(assets)), () => {
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
       <Root />
