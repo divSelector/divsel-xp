@@ -92,8 +92,29 @@ body {
 #command-prompt > .window-body > pre {
     height: inherit;
     max-width: inherit;
-    white-space: normal;
+    white-space: pre-line;
+    line-height: 22px;
+    overflow-y: auto;
+    padding-bottom: 100px;
+
 }
+
+
+#command-prompt input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: pink;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    word-wrap: break-word;
+    width:60%;
+    padding: 0;
+    margin: 0;
+    caret-color: white;
+  }
 
 .recycle-bin {
     position: absolute;
