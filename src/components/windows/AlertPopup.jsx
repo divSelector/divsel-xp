@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import alertIcon from '../../assets/alert.png'
 import { useWindow } from '../../hooks/useWindow';
+import Window from '../containers/Window';
 
 export default function AlertPopup({ windowMessage, windowTitle, initialPosition, id }) {
   const [storedPopupMessage, _] = useState(windowMessage)
@@ -17,38 +18,34 @@ export default function AlertPopup({ windowMessage, windowTitle, initialPosition
     dragMouseDownWindow, dragMouseUpWindow, dragMouseMoveWindow, 
     maximizeWindow, minimizeWindow } = useWindow(windowOptions);
 
+  const windowStyle = {
+    position: 'absolute',
+    left: position.x,
+    top: position.y,
+    width: windowSize.x,
+    zIndex: zIndex,
+  }
+
   return (
     isOpen && <>
-      <div
-        id={id}
-        className="window"
-        style={{
-          position: 'absolute',
-          left: position.x,
-          top: position.y,
-          width: windowSize.x,
-          zIndex: zIndex,
-        }}
-        onMouseMove={dragMouseMoveWindow}
-        onMouseUp={dragMouseUpWindow}
-        onMouseDown={dragMouseDownWindow}
-      >
-        <div className="title-bar" onMouseDown={dragMouseDownTitleBar}>
-          <div className="title-bar-text">{windowTitle}</div>
-          <div className="title-bar-controls">
-            <button aria-label="Minimize" onMouseUp={minimizeWindow} />
-            <button aria-label="Maximize" onMouseUp={maximizeWindow} />
-            <button aria-label="Close" onMouseUp={() => setIsOpen(false)} />
-          </div>
+    <Window 
+        position={position}
+        zIndex={zIndex}
+        dragMouseDownTitleBar={dragMouseDownTitleBar}
+        dragMouseDownWindow={dragMouseDownWindow}
+        dragMouseUpWindow={dragMouseUpWindow}
+        dragMouseMoveWindow={dragMouseMoveWindow}
+        maximizeWindow={maximizeWindow}
+        minimizeWindow={minimizeWindow}
+        windowTitle={windowTitle}
+        windowStyle={windowStyle}
+        setIsOpen={setIsOpen}
+    >
+        <p style={{ textAlign: "center" }}>{storedPopupMessage}</p>
+        <div className="field-row" style={{ justifyContent: "center" }}>
+          <button onClick={() => setIsOpen(false)}>Ok</button>
         </div>
-
-        <div className="window-body">
-          <p style={{ textAlign: "center" }}>{storedPopupMessage}</p>
-          <div className="field-row" style={{ justifyContent: "center" }}>
-            <button onClick={() => setIsOpen(false)}>Ok</button>
-          </div>
-        </div>
-      </div>
+      </Window>
     </>
   )
 }

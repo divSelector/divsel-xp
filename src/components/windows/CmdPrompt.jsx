@@ -18,16 +18,18 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         dragMouseUpWindow, dragMouseMoveWindow, maximizeWindow, 
         minimizeWindow } = useWindow(windowOptions);
 
+    const windowStyle = {
+        position: 'absolute',
+        left: position.x,
+        top: position.y,
+    }
+
     return (
         isOpen && <>
             <div
                 id="command-prompt"
                 className="window"
-                style={{
-                    position: 'absolute',
-                    left: position.x,
-                    top: position.y,
-                }}
+                style={windowStyle}
                 onMouseMove={dragMouseMoveWindow}
                 onMouseUp={dragMouseUpWindow}
                 onMouseDown={dragMouseDownWindow}
