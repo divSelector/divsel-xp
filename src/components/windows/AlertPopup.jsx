@@ -29,6 +29,7 @@ export default function AlertPopup({ windowMessage, windowTitle, initialPosition
     isOpen && <>
       <Window
         id={id}
+        className="window popup"
         windowTitle={windowTitle}
         windowStyle={windowStyle}
         setIsOpen={setIsOpen}

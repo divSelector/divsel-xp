@@ -45,6 +45,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         isOpen && <>
             <Window
                 id="command-prompt"
+                className="window"
                 windowTitle="Command Prompt"
                 windowStyle={windowStyle}
                 setIsOpen={setIsOpen}

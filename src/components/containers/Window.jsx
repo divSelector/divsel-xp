@@ -6,12 +6,12 @@ const Window = ({
   dragMouseDownTitleBar, dragMouseDownWindow,
   dragMouseUpWindow, dragMouseMoveWindow,
   maximizeWindow, minimizeWindow,
-  windowTitle, windowStyle, setIsOpen,
+  windowTitle, windowStyle, setIsOpen, className,
   children
 }) => (
   <div
     id={id}
-    className="window"
+    className={className}
     style={windowStyle}
     onMouseMove={dragMouseMoveWindow}
     onMouseUp={dragMouseUpWindow}

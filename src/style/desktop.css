@@ -292,7 +292,7 @@ textarea {
     }
   }
   
-  .popup {
+  .popup-anim {
     animation: shatter 0.5s forwards;
   }
   

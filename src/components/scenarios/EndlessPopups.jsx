@@ -2,18 +2,19 @@ import { useState, useEffect } from 'react';
 import AlertPopup from "../windows/AlertPopup";
 import { getRandomHackerMessage } from "../../data/dialog";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
     const [windowPositions, setWindowPositions] = useState([]);
-    const [closedAllPopups, setClosedAllPopups] = useState(false);
 
     const navigate = useNavigate()
 
+    const [closedAllPopups, setClosedAllPopups] = useLocalStorage('endless-popups-1', false)
+
     const checkIfAllPopupsClosed = () => {
-        let popups = document.querySelectorAll('.desktop > .window');
-        if (popups.length > 2) {
-            setClosedAllPopups(false);
-        } else {
+        let popups = document.querySelectorAll('.desktop > .popup');
+        if (popups.length != 0 && popups.length <= 1) {
+            console.log("setting to true")
             setClosedAllPopups(true);
         }
     };
@@ -37,11 +38,11 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
     };
 
     useEffect(() => {
-        calculateInitialPositions(startAt)
+        if (!closedAllPopups) calculateInitialPositions(startAt)
     }, [])
 
     useEffect(() => {
-        checkIfAllPopupsClosed()
+        if (!closedAllPopups) checkIfAllPopupsClosed()
     }, [windowPositions])
 
     useEffect(() => {
@@ -66,7 +67,7 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
 
                 setWindowPositions(newWindowPositions);
 
-            }, perMiliSec);
+            }, 1200);
 
             return () => {
                 clearInterval(interval);
