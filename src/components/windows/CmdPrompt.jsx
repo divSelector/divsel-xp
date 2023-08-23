@@ -3,6 +3,7 @@ import { useWindow } from '../../hooks/useWindow';
 import Window from '../containers/Window';
 import { useState } from 'react';
 import { useRef } from 'react';
+import { existingDirectories } from '../../data/filesystem';
 
 export default function CmdPrompt({ isOpen, setIsOpen }) {
 
@@ -41,6 +42,77 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         width: windowSize.x,
     }
 
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            const enteredCommand = e.target.value;
+            const stdInLine = prompt + enteredCommand + '\n';
+            const stdOutLines = processCommand(enteredCommand);
+            setOutput([...output, stdInLine, ...stdOutLines]);
+            e.target.value = '';
+            console.log(output)
+            outputRef.current.scrollTop = outputRef.current.scrollHeight;
+        }
+    }
+
+    function runDirCmd(args) {
+        return ['Your Files Have Been Deleted...', ':)']
+    }
+
+
+    function findExistingDirectory(subPath) {
+        const lowercaseSubPath = subPath.toLowerCase();
+        for (const existingDir of existingDirectories) {
+            if (existingDir.endsWith(lowercaseSubPath)) {
+                return existingDir;
+            }
+        }
+        return null;
+    }
+
+    function runCdCmd(args) {
+        const destination = args[0].toLowerCase();
+        const currentDirectory = prompt.split('> ')[0];
+
+        if (!destination || destination === '.') {
+            // No destination provided or just ".": stay in the same directory
+            return [prompt + ' '];
+        } else if (destination === '..') {
+            // Go to the parent directory
+            const parentDirectory = currentDirectory.split('\\').slice(0, -1).join('\\');
+            setPrompt(parentDirectory.toUpperCase() + '> ');
+            return [];
+        } else if (existingDirectories.includes(destination)) {
+            // Navigate to an existing directory
+            setPrompt(destination.toUpperCase() + '> ');
+            return [];
+        } else {
+            // Check for relative path
+            const existingDir = findExistingDirectory(destination);
+            if (existingDir) {
+                setPrompt(existingDir.toUpperCase() + '> ');
+                return [];
+            } else {
+                // Directory doesn't exist
+                return [`The system cannot find the path specified.`];
+            }
+        }
+    }
+
+    const processCommand = (stdin) => {
+        const argv = stdin
+            .split(' ')
+            .filter(item => item != '');
+        const script = argv[0];
+        const args = argv.slice(1);
+        let stdout;
+        if (script == 'dir') stdout = runDirCmd(args)
+        else if (script == 'cd') stdout = runCdCmd(args)
+        else if (script) stdout = [`Can't recognize '${script}' as an internal or external command, or batch script.`]
+        else return []
+
+        return stdout.map(each => each + '\n')
+    }
+
     return (
         isOpen && <>
             <Window
@@ -59,18 +131,10 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                             <span key={index} dangerouslySetInnerHTML={{ __html: line }} />
                         ))}
                         <span>
-                            <span dangerouslySetInnerHTML={{__html: prompt}} />
+                            <span dangerouslySetInnerHTML={{ __html: prompt }} />
                             <input
                                 ref={inputRef}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter') {
-                                        const newLine = prompt + e.target.value + '\n';
-                                        setOutput([...output, newLine]);
-                                        e.target.value = '';
-                                        console.log(output)
-                                        outputRef.current.scrollTop = outputRef.current.scrollHeight;
-                                    }
-                                }}
+                                onKeyDown={onKeyDown}
                             ></input>
                         </span>
                     </div>
@@ -80,3 +144,4 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         </>
     )
 }
+
