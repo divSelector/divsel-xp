@@ -87,13 +87,13 @@ const scenario1 = [
   'J00 |-|4V3 833|\\| |-|4(|<3|) 4|\\||) |>VV|\\|3|) 4|\\||) |_|773.-|_`/ 4|\\||\\||-|1|_473|) 8`/ 73|-| 9.-347357 |\\/|057 |_337 |-|4><0.- 0f 4|_|_ 71|\\/|3 J3Ff |<\nif joo w4N7 7o 54ve joor pREcIouZ FILEz, JOO wILL h4VE 7o 57OP my POpuPZ fir57.\n\n'
 ]
 
-export const outputScenarios = [
-  [scenario1],
-  [
-    ...scenario1,
-    "\nI... admit I didn't expect you to be able to do that.\n\n",
+const scenario2 = [
+  "\nI... admit I didn't expect you to be able to do that.\n\n",
     "I'll speak to you like a human being. You've earned it.\n\n",
     "The file system is corrupted. I doubt you'll be able to restore it, since a newbie like you doesn't know anything about cmd.exe... And that's all you have left. Sorry.\n\n"
+]
 
-  ]
+export const outputScenarios = [
+  [scenario1],
+  [...scenario1,...scenario2]
 ]
