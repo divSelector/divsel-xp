@@ -1,4 +1,3 @@
-// WindowContainer.js
 import React from 'react';
 
 const Window = ({

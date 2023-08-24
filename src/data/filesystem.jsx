@@ -3,7 +3,7 @@ class Node {
         this.name = name.toLowerCase();
         this.isFile = isFile;
         this.children = {};
-        this.parent = null; // Reference to the parent node
+        this.parent = null;
     }
 
     toString() {
@@ -84,7 +84,6 @@ class FileSystem {
     }
 }
 
-// Example usage
 const fs = new FileSystem();
 
 fs.addPath('C:\\WINDOWS', false);
