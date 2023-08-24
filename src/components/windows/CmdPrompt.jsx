@@ -4,22 +4,18 @@ import Window from '../containers/Window';
 import { useState, useEffect } from 'react';
 import { useRef } from 'react';
 import { fs } from '../../data/filesystem';
+import { useScenario } from '../../context/scenario';
+import { outputScenarios } from '../../data/dialog';
 
 export default function CmdPrompt({ isOpen, setIsOpen }) {
 
     const inputRef = useRef(null);
     const outputRef = useRef(null);
     const [prompt, setPrompt] = useState('C:\\WINDOWS\\SYSTEM32' + '> ')
-    const [scenarioIdx, setScenarioIdx] = useState(0)
-    const [windowTitle, setWindowTitle] = useState("Command Prompt")
 
-    let outputScenarios = [
-        [
-            `Microsoft&#10094;R&#10095; Windows DOS &#10094;C&#10095; Copyright Microsoft Corp 1990-2001.\n`,
-            prompt, `type C:\\lulz.txt\n\n`,
-            'J00 |-|4V3 833|\\| |-|4(|<3|) 4|\\||) |>VV|\\|3|) 4|\\||) |_|773.-|_`/ 4|\\||\\||-|1|_473|) 8`/ 73|-| 9.-347357 |\\/|057 |_337 |-|4><0.- 0f 4|_|_ 71|\\/|3 J3Ff |<\nif joo w4N7 7o 54ve joor pREcIouZ FILEz, JOO wILL h4VE 7o 57OP my POpuPZ fir57.\n\n'
-        ]
-    ]
+    const { scenarioIdx } = useScenario()
+
+    const [windowTitle, setWindowTitle] = useState("Command Prompt")
 
     const [output, setOutput] = useState(outputScenarios[scenarioIdx])
 
@@ -190,6 +186,12 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         }
     }
 
+    const runClsCmd = () =>{
+        setTimeout(() => {
+            setOutput(outputScenarios[scenarioIdx]);
+        }, 0);
+    }
+
     const processCommand = (stdin) => {
         const argv = stdin.split(' ').filter(item => item !== '');
         const script = argv[0];
@@ -235,6 +237,9 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         scrollToBottom();
     }, [output]);
 
+    useEffect(() => {
+        setOutput(outputScenarios[scenarioIdx]);
+    }, [scenarioIdx])
 
     return (
         isOpen && <>

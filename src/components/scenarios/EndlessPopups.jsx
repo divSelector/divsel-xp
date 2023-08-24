@@ -3,14 +3,17 @@ import AlertPopup from "../windows/AlertPopup";
 import { getRandomHackerMessage } from "../../data/dialog";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useScenario } from '../../context/scenario';
 
 export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
     const [windowPositions, setWindowPositions] = useState([]);
 
     const navigate = useNavigate()
 
+    const { scenarioIdx, setScenarioIdx } = useScenario()
+    
     const [closedAllPopups, setClosedAllPopups] = useLocalStorage('endless-popups-1', false)
-
+    
     const checkIfAllPopupsClosed = () => {
         let popups = document.querySelectorAll('.desktop > .popup');
         if (popups.length != 0 && popups.length <= 1) {
@@ -46,6 +49,14 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
     }, [windowPositions])
 
     useEffect(() => {
+        if (closedAllPopups) {
+            console.log("Popups should all be closed.")
+            console.log(scenarioIdx)
+            if (scenarioIdx == 0) {
+                console.log("scenarioIdx should be set to 1")
+                setScenarioIdx(1)
+            }
+        }
         if (!closedAllPopups) {
             if (Object.keys(windowPositions).length > endAt) {
 
