@@ -27,7 +27,7 @@ class Node {
             childNodes.push(childNode);
         }
 
-        return childNodes;
+        return childNodes.sort();
     }
 }
 
@@ -193,9 +193,6 @@ fs.addPath('C:\\windows\\system32\\api-ms-win-core-threadpool-private-l1-1-0.dll
 fs.addPath('C:\\windows\\system32\\virtdisk.dll', true)
 fs.addPath('C:\\windows\\system32\\api-ms-win-core-stringansi-l1-1-0.dll', true)
 fs.addPath('C:\\windows\\system32\\spool\\drivers\\color\\srgb', true)
-fs.addPath('color', true)
-fs.addPath('space', true)
-fs.addPath('profile.icm', true)
 fs.addPath('C:\\windows\\system32\\ext-ms-win-rtcore-ntuser-syscolors-l1-1-0.dll', true)
 fs.addPath('C:\\windows\\system32\\ext-ms-win-shell-comctl32-init-l1-1-0.dll', true)
 fs.addPath('C:\\windows\\system32\\ext-ms-win-security-cryptui-l1-1-0.dll', true)

@@ -64,8 +64,8 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
 
             for (const childNode of childNodes) {
                 const line = childNode.isFile
-                    ? `       ${childNode.name}    [File]`
-                    : `       ${childNode.name}    [Dir]`;
+                    ? `       ${childNode.name.toUpperCase()}    [File]`
+                    : `       ${childNode.name.toUpperCase()}    [Dir]`;
 
                 lines.push(line);
                 if (childNode.isFile) {
@@ -76,7 +76,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             }
 
             lines.push(`\n${fileCount} File(s)`);
-            lines.push(`${dirCount} Directories(s)\n`);
+            lines.push(`${dirCount} Directorie(s)\n`);
             return lines;
         }
 
