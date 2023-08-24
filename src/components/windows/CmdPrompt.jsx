@@ -36,13 +36,6 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
 
     const { position, commonWindowProps } = useWindow(windowOptions);
 
-    const windowStyle = {
-        position: 'absolute',
-        left: position.x,
-        top: position.y,
-        width: windowSize.x,
-    }
-
     const scrollToBottom = () => {
         outputRef.current.scrollTop = outputRef.current.scrollHeight;
     }
@@ -249,7 +242,12 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                 id="command-prompt"
                 className="window"
                 windowTitle={windowTitle}
-                windowStyle={windowStyle}
+                windowStyle={{
+                    position: 'absolute',
+                    left: position.x,
+                    top: position.y,
+                    width: windowSize.x,
+                }}
                 setIsOpen={setIsOpen}
                 {...commonWindowProps}
             >

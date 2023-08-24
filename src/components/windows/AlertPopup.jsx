@@ -17,21 +17,19 @@ export default function AlertPopup({ windowMessage, windowTitle, initialPosition
   const { isOpen, setIsOpen, position, 
           zIndex, commonWindowProps } = useWindow(windowOptions);
 
-  const windowStyle = {
-    position: 'absolute',
-    left: position.x,
-    top: position.y,
-    width: windowSize.x,
-    zIndex: zIndex,
-  }
-
   return (
     isOpen && <>
       <Window
         id={id}
         className="window popup"
         windowTitle={windowTitle}
-        windowStyle={windowStyle}
+        windowStyle={{
+          position: 'absolute',
+          left: position.x,
+          top: position.y,
+          width: windowSize.x,
+          zIndex: zIndex,
+        }}
         setIsOpen={setIsOpen}
         {...commonWindowProps}
       >
