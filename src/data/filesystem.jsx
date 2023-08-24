@@ -5,6 +5,30 @@ class Node {
         this.children = {};
         this.parent = null; // Reference to the parent node
     }
+
+    toString() {
+        const pathParts = [];
+        let currentNode = this;
+
+        while (currentNode !== null) {
+            pathParts.unshift(currentNode.name);
+            currentNode = currentNode.parent;
+        }
+
+        const absolutePath = pathParts.join('\\');
+        return absolutePath.charAt(0) === '\\' ? absolutePath.slice(1) : absolutePath;
+    }
+
+    getChildren() {
+        const childNodes = [];
+
+        for (const childName in this.children) {
+            const childNode = this.children[childName];
+            childNodes.push(childNode);
+        }
+
+        return childNodes;
+    }
 }
 
 class FileSystem {

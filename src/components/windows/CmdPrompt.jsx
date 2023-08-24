@@ -1,7 +1,7 @@
 import commandIcon from '../../assets/cmd.png'
 import { useWindow } from '../../hooks/useWindow';
 import Window from '../containers/Window';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRef } from 'react';
 import { fs } from '../../data/filesystem';
 
@@ -43,6 +43,10 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         width: windowSize.x,
     }
 
+    const scrollToBottom = () => {
+        outputRef.current.scrollTop = outputRef.current.scrollHeight;
+    }
+
     const onKeyDown = (e) => {
         if (e.key === 'Enter') {
             const enteredCommand = e.target.value;
@@ -50,30 +54,61 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             const stdOutLines = processCommand(enteredCommand);
             setOutput([...output, stdInLine, ...stdOutLines]);
             e.target.value = '';
-            console.log(output)
-            outputRef.current.scrollTop = outputRef.current.scrollHeight;
         }
     }
 
-    function runDirCmd(args) {
-        return ['Your Files Have Been Deleted...', ':)']
+    const pathFromPrompt = (path) => {
+        if (path.endsWith('> ')) {
+            path = path.split('> ')[0]
+        }
+        return path.toLowerCase();
+    }
+
+    function runDirCmd() {
+
+        function generateDirOutput(node) {
+            const childNodes = node.getChildren();
+            const lines = [];
+
+            let fileCount = 0;
+
+            for (const childNode of childNodes) {
+                const line = childNode.isFile
+                    ? `       ${childNode.name}    [File]`
+                    : `       ${childNode.name}    [Dir]`;
+
+                lines.push(line);
+                if (childNode.isFile) {
+                    fileCount++;
+                }
+            }
+
+            lines.push(`\n${fileCount} File(s)`);
+            return lines;
+        }
+
+        const cwd = pathFromPrompt(prompt)
+        const node = fs.findNode(cwd)
+
+        const banner = [
+            'Volume in drive C has no label.',
+            'Volume serial number is 0000-0000\n',
+            `Directory of ${cwd.toUpperCase()}:\n`
+        ]
+        let lines = node ? generateDirOutput(node) : [];
+        // generate lines with node.getChildren() here
+        return [...banner, ...lines]
     }
 
     function runCdCmd(args) {
-
-        const pathFromPrompt = (path) => {
-            if (path.endsWith('> ')) {
-                path = path.split('> ')[0]
-            }
-            return path.toLowerCase();
-        }
 
         const updatePrompt = (path) => {
             if (path.length === 2) {
                 path += '\\';
             } else if (path.length <= 1) {
                 return []
-
+            } else if (fs.findNode(path).isFile) {
+                return ['Directory name invalid.\n']
             }
             setPrompt(path.toUpperCase() + "> ")
             return []
@@ -90,30 +125,32 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         // No destination provided or just ".": stay in the same directory
         if (!destination || destination === '.') {
             return [prompt + ' '];
-            
+
         } else if (destination === '..') {
             // Go to the parent directory
             const parent = fs.findNode(pathFromPrompt(prompt)).parent
             if (!parent.isFile) {
-                return updatePrompt(fs.toString(parent))
+                return updatePrompt(parent.toString())
             } else return []
-            
+
         } else if (fs.findNode(destination)) {
             // Navigate to a directory by absolute path
             const node = fs.findNode(destination)
-            return updatePrompt(fs.toString(node))
-            
+            return updatePrompt(node.toString())
+
         } else {
             // Try to navigate to a directory by relative path
             const cwd = pathFromPrompt(prompt)
+            console.log(cwd)
+            console.log(destination)
             if (fs.findNode(cwd + "\\" + destination)) {
                 return updatePrompt(cwd + "\\" + destination)
-                
+
             } else if (fs.findNode(cwd + destination)) {
                 // Required check for path at root level height
                 return updatePrompt(cwd + destination)
             } else {
-                return [`The system cannot find the path specified.`]
+                return [`File not found.\n`]
             }
 
         }
@@ -125,6 +162,11 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         const args = argv.slice(1);
 
         const stdout = (() => {
+            const invalidDrive = /^[a-bd-zA-BD-Z]:$/i.test(script);
+            const validDrive = /^[cC]:$/i.test(script);
+            if (invalidDrive) return ['Path not found.\n']
+            if (validDrive) return []
+
             switch (script) {
                 case 'dir':
                     return runDirCmd(args);
@@ -132,7 +174,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                     return runCdCmd(args);
                 default:
                     if (script) {
-                        return [`Can't recognize '${script}' as an internal or external command, or batch script.`];
+                        return [`Can't recognize '${script}' as an internal or external command, or batch script.\n`];
                     } else {
                         return [];
                     }
@@ -143,6 +185,12 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
 
         return stdout.map(each => each + '\n');
     }
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [output]);
+    
+
     return (
         isOpen && <>
             <Window
