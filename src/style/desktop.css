@@ -126,6 +126,10 @@ body {
     transform: translateY(3px);
 }
 
+.title-bar-text {
+    overflow-x: hidden;
+}
+
 .menu-bar {
     height: 21px;
     font-size: 14px;
