@@ -9,7 +9,8 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
 
     const inputRef = useRef(null);
     const outputRef = useRef(null);
-    const [prompt, setPrompt] = useState('C:&#92;WINDOWS&#92;SYSTEM32&gt;&nbsp;')
+    // const [prompt, setPrompt] = useState('C:&#92;WINDOWS&#92;SYSTEM32&gt;&nbsp;')
+    const [prompt, setPrompt] = useState('C:\\WINDOWS\\SYSTEM32'+ '> ')
     const [scenarioIdx, setScenarioIdx] = useState(0)
 
     let outputScenarios = [
@@ -70,7 +71,10 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
     }
 
     function runCdCmd(args) {
-        const destination = args[0].toLowerCase();
+        let destination
+        if (args[0]) destination = args[0].toLowerCase()
+        else return []
+
         const currentDirectory = prompt.split('> ')[0];
 
         if (!destination || destination === '.') {
@@ -78,7 +82,13 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             return [prompt + ' '];
         } else if (destination === '..') {
             // Go to the parent directory
-            const parentDirectory = currentDirectory.split('\\').slice(0, -1).join('\\');
+            let parentDirectory = currentDirectory.split('\\').slice(0, -1).join('\\');
+            // Add trailing file sep at root depth
+            if (parentDirectory.length === 2) {
+                parentDirectory += '\\'
+            }
+            // Prevent parent traversal beyond root
+            else if (parentDirectory.length <= 1 ) return []
             setPrompt(parentDirectory.toUpperCase() + '> ');
             return [];
         } else if (existingDirectories.includes(destination)) {
