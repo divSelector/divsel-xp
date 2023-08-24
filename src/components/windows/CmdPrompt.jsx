@@ -11,6 +11,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
     const outputRef = useRef(null);
     const [prompt, setPrompt] = useState('C:\\WINDOWS\\SYSTEM32' + '> ')
     const [scenarioIdx, setScenarioIdx] = useState(0)
+    const [windowTitle, setWindowTitle] = useState("Command Prompt")
 
     let outputScenarios = [
         [
@@ -158,6 +159,44 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         }
     }
 
+    const runHelpCmd = (args) => {
+        if (args.length === 0) {
+            return [
+                "\n",
+                "CMD built-in commands are:",
+                "CD (CHDIR)      Change current default directory",
+                "CLS             Clear the console screen",
+                "DIR             List the contents of a directory",
+                "ECHO            Copy text directly to the console output",
+                "HELP            Show brief help details on a topic",
+                "TITLE           Set the window title for the CMD session",
+                "\n"
+            ]
+        }
+
+        switch (args.join(" ")) {
+            case "chdir":
+                return ["CHDIR <directory> changes the current default directory\n"]
+            case "cd":
+                return ["CD <directory> is the short version of CHDIR. It changes the default directory.\n"]
+            case "title":
+                return ["TITLE <string> sets the window title for the cmd window.\n"]
+            case 'dir':
+                return ["DIR lists the contents of a directory.\n"]
+            case 'echo':
+                return ['ECHO <string> displays <string> on the current terminal device.\n']
+            case 'cls':
+                return ['CLS clears the console screen.\n']
+            case 'help':
+                return [
+                    "HELP <command> shows brief help details on a topic.",
+                    "HELP without an argument shows all built-in CMD commands.\n"
+                ]
+            default:
+                return [`No help available for ${args.join(" ")}\n`]
+        }
+    }
+
     const processCommand = (stdin) => {
         const argv = stdin.split(' ').filter(item => item !== '');
         const script = argv[0];
@@ -167,18 +206,26 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             const invalidDrive = /^[a-bd-zA-BD-Z]:$/i.test(script);
             const validDrive = /^[cC]:$/i.test(script);
             if (invalidDrive) return ['Path not found.\n']
-            if (validDrive) return []
+            else if (validDrive) return []
 
             switch (script) {
                 case 'dir':
                     return runDirCmd(args);
                 case 'cd':
+                case 'chdir':
                     return runCdCmd(args);
+                case 'echo':
+                    return [args.join(' ')]
                 case 'cls':
                     setTimeout(() => {
-                        setOutput(outputScenarios[scenarioIdx]); 
+                        setOutput(outputScenarios[scenarioIdx]);
                     }, 0);
                     return []
+                case 'title':
+                    setWindowTitle(args.join(' '));
+                    return []
+                case 'help':
+                    return runHelpCmd(args);
                 default:
                     if (script) {
                         return [`Can't recognize '${script}' as an internal or external command, or batch script.\n`];
@@ -187,8 +234,6 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                     }
             }
         })();
-
-        console.log(stdout)
 
         return stdout.map(each => each + '\n');
     }
@@ -203,7 +248,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             <Window
                 id="command-prompt"
                 className="window"
-                windowTitle="Command Prompt"
+                windowTitle={windowTitle}
                 windowStyle={windowStyle}
                 setIsOpen={setIsOpen}
                 {...commonWindowProps}
