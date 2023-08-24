@@ -9,7 +9,6 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
 
     const inputRef = useRef(null);
     const outputRef = useRef(null);
-    // const [prompt, setPrompt] = useState('C:&#92;WINDOWS&#92;SYSTEM32&gt;&nbsp;')
     const [prompt, setPrompt] = useState('C:\\WINDOWS\\SYSTEM32' + '> ')
     const [scenarioIdx, setScenarioIdx] = useState(0)
 
@@ -87,7 +86,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             }
 
             lines.push(`\n${fileCount} File(s)`);
-            lines.push(`\n${dirCount} Directories(s)`);
+            lines.push(`${dirCount} Directories(s)\n`);
             return lines;
         }
 
@@ -175,6 +174,11 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                     return runDirCmd(args);
                 case 'cd':
                     return runCdCmd(args);
+                case 'cls':
+                    setTimeout(() => {
+                        setOutput(outputScenarios[scenarioIdx]); 
+                    }, 0);
+                    return []
                 default:
                     if (script) {
                         return [`Can't recognize '${script}' as an internal or external command, or batch script.\n`];
@@ -192,7 +196,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
     useEffect(() => {
         scrollToBottom();
     }, [output]);
-    
+
 
     return (
         isOpen && <>
