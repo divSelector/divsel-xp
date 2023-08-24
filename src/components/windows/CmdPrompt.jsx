@@ -71,6 +71,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             const lines = [];
 
             let fileCount = 0;
+            let dirCount = 0
 
             for (const childNode of childNodes) {
                 const line = childNode.isFile
@@ -80,10 +81,13 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                 lines.push(line);
                 if (childNode.isFile) {
                     fileCount++;
+                } else {
+                    dirCount++;
                 }
             }
 
             lines.push(`\n${fileCount} File(s)`);
+            lines.push(`\n${dirCount} Directories(s)`);
             return lines;
         }
 
@@ -96,7 +100,6 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
             `Directory of ${cwd.toUpperCase()}:\n`
         ]
         let lines = node ? generateDirOutput(node) : [];
-        // generate lines with node.getChildren() here
         return [...banner, ...lines]
     }
 
