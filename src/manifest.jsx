@@ -28,6 +28,7 @@ import sound from './assets/sound.png'
 import turnoff from './assets/turnoff.png'
 import user from './assets/user.png'
 import winPlayer from './assets/winPlayer.png'
+import winampIcon from './assets/winamp.png'
 
 export const backgroundImages = [
     '/xp/welcome-long.png',
@@ -64,5 +65,6 @@ export const assets = {
     sound,
     turnoff,
     user,
-    winPlayer
+    winPlayer,
+    winampIcon
 }

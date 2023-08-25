@@ -1,24 +1,34 @@
 import { assets } from "../manifest"
 
-export default function StartMenu({ setStartMenuOpen }) {
+export default function StartMenu({ setStartMenuOpen, setShowWinamp, showWinamp }) {
 
     let timeoutId
     const handleMouseEnter = () => {
         clearTimeout(timeoutId);
         setStartMenuOpen(true);
-      };
-    
-      const handleMouseLeave = () => {
+    };
+
+    const handleMouseLeave = () => {
         timeoutId = setTimeout(() => {
             setStartMenuOpen(false);
-        }, 200); 
-      };
+        }, 200);
+    };
+
+    const onStartMenuClick = () => {
+        setStartMenuOpen(false);
+    }
+
+    const openWinamp = () => {
+        onStartMenuClick()
+        setShowWinamp(true)
+    }
+
 
     return (
         <>
             <div id="menu"
-                 onMouseLeave={() => handleMouseLeave()}
-                 onMouseEnter={() => handleMouseEnter()}
+                onMouseLeave={() => handleMouseLeave()}
+                onMouseEnter={() => handleMouseEnter()}
             >
                 <div id="avatar">
                     <img src={assets.user} />
@@ -40,9 +50,9 @@ export default function StartMenu({ setStartMenuOpen }) {
                             <img src={assets.msn} />
                             <p>MSN</p>
                         </div>
-                        <div>
-                            <img src={assets.winPlayer} />
-                            <p>Windows Media Player</p>
+                        <div onClick={openWinamp}>
+                            <img src={assets.winampIcon} />
+                            <p>Winamp</p>
                         </div>
                         <div>
                             <img src={assets.messenger} />
