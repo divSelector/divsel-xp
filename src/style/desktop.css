@@ -1,14 +1,20 @@
 * {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
 
     box-sizing: border-box;
-  }
+}
 
 body {
     margin: 0;
@@ -19,7 +25,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
-  }
+}
 
 
 .desktop {
@@ -66,11 +72,11 @@ body {
 }
 
 .icon::selection {
-    background-color:transparent;
-} 
+    background-color: transparent;
+}
 
 .icon::-moz-selection {
-    background-color:transparent;
+    background-color: transparent;
 }
 
 .selected {
@@ -84,12 +90,12 @@ body {
 }
 
 
-#command-prompt > .window-body {
+#command-prompt>.window-body {
     height: inherit;
     max-width: inherit;
 }
 
-#command-prompt > .window-body > pre {
+#command-prompt>.window-body>pre {
     height: inherit;
     max-width: inherit;
     white-space: pre-line;
@@ -109,11 +115,11 @@ body {
     font-style: inherit;
     font-weight: inherit;
     word-wrap: break-word;
-    width:60%;
+    width: 60%;
     padding: 0;
     margin: 0;
     caret-color: white;
-  }
+}
 
 .recycle-bin {
     position: absolute;
@@ -286,19 +292,16 @@ textarea {
 
 @keyframes shatter {
     0% {
-      transform: scale(40.5) rotate(160deg);
-      opacity: 0;
+        transform: scale(40.5) rotate(160deg);
+        opacity: 0;
     }
+
     100% {
-      transform: scale(1.0);
-      opacity: 1;
+        transform: scale(1.0);
+        opacity: 1;
     }
-  }
-  
-  .popup-anim {
+}
+
+.popup-anim {
     animation: shatter 0.5s forwards;
-  }
-  
-  #webamp {
-    visibility: hidden;
-  }
+}

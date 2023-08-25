@@ -44,36 +44,6 @@ export default function Winamp({ isOpen, setIsOpen }) {
     };
   }, [winampRef]);
 
-  useEffect(() => {
-    let intervalId;
-
-    const positionElement = (elem) => {
-      let x, y
-      for (const [index, each] of Array.from(elem.children).entries()) {
-        x = 400
-        y = 100 + (index+1) * 116;
-        elem.style.transform = `translate(${x}px, ${y}px)`
-      }
-      elem.parentElement.parentElement.style.visibility = 'visible'
-    }
-
-    const checkElement = () => {
-      const elem = document.querySelector('#webamp > div > div');
-      if (elem) {
-        clearInterval(intervalId);
-        positionElement(elem)
-      }
-    };
-
-    if (isOpen) {
-      intervalId = setInterval(checkElement, 100);
-    }
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [isOpen]);
-
   if (!Webamp.browserIsSupported()) {
     return <></>
   }
