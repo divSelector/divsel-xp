@@ -299,3 +299,6 @@ textarea {
     animation: shatter 0.5s forwards;
   }
   
+  #webamp {
+    visibility: hidden;
+  }
