@@ -48,10 +48,11 @@ export default function Winamp({ isOpen, setIsOpen }) {
     let intervalId;
 
     const positionElement = (elem) => {
+      let x, y
       for (const [index, each] of Array.from(elem.children).entries()) {
-        const topValue = 100 + index+1 * 116;
-        each.style.top = `${topValue}px`;
-        each.style.left = "100px"
+        x = 400
+        y = 100 + (index+1) * 116;
+        elem.style.transform = `translate(${x}px, ${y}px)`
       }
       elem.parentElement.parentElement.style.visibility = 'visible'
     }
