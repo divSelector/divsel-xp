@@ -6,8 +6,6 @@ export function ScenarioProvider({ children }) {
 
     const [scenarioIdx, setScenarioIdx] = useState(0)
 
-    console.log(scenarioIdx)
-
     return (
         <ScenarioContext.Provider value={{
             scenarioIdx, setScenarioIdx

@@ -17,7 +17,6 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
     const checkIfAllPopupsClosed = () => {
         let popups = document.querySelectorAll('.desktop > .popup');
         if (popups.length != 0 && popups.length <= 1) {
-            console.log("setting to true")
             setClosedAllPopups(true);
         }
     };
@@ -50,18 +49,12 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
 
     useEffect(() => {
         if (closedAllPopups) {
-            console.log("Popups should all be closed.")
-            console.log(scenarioIdx)
             if (scenarioIdx == 0) {
-                console.log("scenarioIdx should be set to 1")
                 setScenarioIdx(1)
             }
         }
         if (!closedAllPopups) {
             if (Object.keys(windowPositions).length > endAt) {
-
-                // TODO FAILURE
-                console.log("FAILURE")
                 setWindowPositions([])
                 navigate('/xp/gameover')
             }
