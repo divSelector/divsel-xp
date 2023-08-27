@@ -212,9 +212,7 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                 case 'echo':
                     return [args.join(' ')]
                 case 'cls':
-                    setTimeout(() => {
-                        setOutput(outputScenarios[scenarioIdx]);
-                    }, 0);
+                    runClsCmd();
                     return []
                 case 'title':
                     setWindowTitle(args.join(' '));
@@ -241,6 +239,8 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
         setOutput(outputScenarios[scenarioIdx]);
     }, [scenarioIdx])
 
+    console.log(output)
+
     return (
         isOpen && <>
             <Window
@@ -261,10 +261,12 @@ export default function CmdPrompt({ isOpen, setIsOpen }) {
                 >
                     <div>
                         {output.map((line, index) => (
-                            <span key={index} dangerouslySetInnerHTML={{ __html: line }} />
+                            <span key={index}>
+                                {line}
+                            </span>
                         ))}
                         <span>
-                            <span dangerouslySetInnerHTML={{ __html: prompt }} />
+                            <span>{prompt}</span>
                             <input
                                 ref={inputRef}
                                 onKeyDown={onKeyDown}
