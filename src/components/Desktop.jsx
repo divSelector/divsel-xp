@@ -13,7 +13,7 @@ export default function Desktop() {
   const [startMenuOpen, setStartMenuOpen] = useState(false)
   const [showCmdPrompt, setShowCmdPrompt] = useState(true);
   const [showWinamp, setShowWinamp] = useState(false);
-  const [showEPOptions, setShowEPOptions] = useState(true);
+  const [showEPOptions, setShowEPOptions] = useState(false);
 
   return (
     <div className="desktop">
@@ -39,10 +39,10 @@ export default function Desktop() {
         />
       }
 
-      {/* <CmdPrompt isOpen={showCmdPrompt} setIsOpen={setShowCmdPrompt} /> */}
+      <CmdPrompt isOpen={showCmdPrompt} setIsOpen={setShowCmdPrompt} />
       <EndlessPopupsOptions isOpen={showEPOptions} setIsOpen={setShowEPOptions} />
 
-      {/* <EndlessPopups startAt={8} perMiliSec={900} endAt={100} /> */}
+      <EndlessPopups startAt={8} perMiliSec={2000} endAt={100} setShowOptions={setShowEPOptions}  />
 
       <Taskbar startMenuOpen={startMenuOpen} setStartMenuOpen={setStartMenuOpen} />
     </div>

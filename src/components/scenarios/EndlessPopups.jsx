@@ -5,19 +5,26 @@ import { useNavigate } from "react-router-dom";
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useScenario } from '../../context/scenario';
 
-export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
+export default function EndlessPopups({ startAt, perMiliSec, endAt, setShowOptions = false, postScenarioSetter = false }) {
     const [windowPositions, setWindowPositions] = useState([]);
 
     const navigate = useNavigate()
 
     const { scenarioIdx, setScenarioIdx } = useScenario()
-    
-    const [closedAllPopups, setClosedAllPopups] = useLocalStorage('endless-popups-1', false)
-    
+
+    let closedAllPopups, setClosedAllPopups
+    if (postScenarioSetter) {
+        [closedAllPopups, setClosedAllPopups] = useState(false)
+    } else {
+        [closedAllPopups, setClosedAllPopups] = useLocalStorage('endless-popups-1', false)
+    }
+
     const checkIfAllPopupsClosed = () => {
         let popups = document.querySelectorAll('.desktop > .popup');
         if (popups.length != 0 && popups.length <= 1) {
             setClosedAllPopups(true);
+            if (postScenarioSetter) postScenarioSetter(false)
+            if (setShowOptions) setShowOptions(true)
         }
     };
 
@@ -48,7 +55,7 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
     }, [windowPositions])
 
     useEffect(() => {
-        if (closedAllPopups) {
+        if (!postScenarioSetter && closedAllPopups) {
             if (scenarioIdx == 0) {
                 setScenarioIdx(1)
             }
@@ -71,7 +78,7 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt }) {
 
                 setWindowPositions(newWindowPositions);
 
-            }, 1200);
+            }, perMiliSec);
 
             return () => {
                 clearInterval(interval);

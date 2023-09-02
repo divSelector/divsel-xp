@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import alertIcon from '../../assets/alert.png'
 import { useWindow } from '../../hooks/useWindow';
 import Window from '../containers/Window';
 import EndlessPopups from '../scenarios/EndlessPopups';
+import { useScenario } from '../../context/scenario';
 
 const useSlider = (min, max, step, defaultState) => {
     const [state, setSlide] = useState(defaultState);
@@ -25,6 +26,7 @@ const useSlider = (min, max, step, defaultState) => {
 export default function EndlessPopupsOptions({ isOpen, setIsOpen }) {
 
     const [isRunning, setIsRunning] = useState(false)
+    const { scenarioIdx, setScenarioIdx } = useScenario()
 
     const startProps = useSlider(8, 20, 2, 8)
     const milisecProps = useSlider(400, 2000, 200, 1000)
@@ -34,7 +36,7 @@ export default function EndlessPopupsOptions({ isOpen, setIsOpen }) {
     const windowOptions = {
         initialPosition: {
             x: 200,
-            y: 50
+            y: 400
         },
         windowSize,
         shouldRaiseZIndex: true,
@@ -42,6 +44,10 @@ export default function EndlessPopupsOptions({ isOpen, setIsOpen }) {
     }
 
     const { position, zIndex, commonWindowProps } = useWindow(windowOptions);
+
+    useEffect(() => {
+        if (scenarioIdx > 0) setIsOpen(true)
+    }, [scenarioIdx])
 
     return (
         isOpen && <>
@@ -107,11 +113,16 @@ export default function EndlessPopupsOptions({ isOpen, setIsOpen }) {
 
                 </div>
 
+                <div className="field-row" style={{ justifyContent: "center" }}>
+                    <button onClick={() => setIsRunning(true)}>Start</button>
+                </div>
+
             </Window>}
             {isRunning && <EndlessPopups
                 startAt={startProps.value}
                 perMiliSec={milisecProps.value}
                 endAt={endProps.value}
+                postScenarioSetter={setIsRunning}
             />}
         </>
     )
