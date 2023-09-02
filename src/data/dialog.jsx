@@ -89,8 +89,7 @@ const scenario1 = [
 
 const scenario2 = [
   "\nCONGRATULATIONS.\n\n",
-    "You can adjust the speed, the starting popup count, and the lose condition popup count. At what point is it impossible to win?\n\n",
-    "Also... you can open Winamp from the start menu. Load music into it from your computer.\n\n",
+    "You can adjust the speed, the starting popup count, and the lose condition popup count. At what point is it impossible to win?\n\n"
 ]
 
 export const outputScenarios = [

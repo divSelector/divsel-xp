@@ -26,7 +26,7 @@ const useSlider = (min, max, step, defaultState) => {
 export default function EndlessPopupsOptions({ isOpen, setIsOpen }) {
 
     const [isRunning, setIsRunning] = useState(false)
-    const { scenarioIdx, setScenarioIdx } = useScenario()
+    const { scenarioIdx } = useScenario()
 
     const startProps = useSlider(8, 20, 2, 8)
     const milisecProps = useSlider(400, 2000, 200, 1000)
