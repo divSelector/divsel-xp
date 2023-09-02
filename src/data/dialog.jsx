@@ -81,16 +81,15 @@ export function getRandomHackerMessage() {
 }
 
 const scenario1 = [
-  `Microsoft&#10094;R&#10095; Windows DOS &#10094;C&#10095; Copyright Microsoft Corp 1990-2001.\n`,
+  `Microsoft❮R❯ Windows DOS ❮C❯ Copyright Microsoft Corp 1990-2001.\n`,
   'C:\\WINDOWS\\SYSTEM32' + '> ',
   `type C:\\lulz.txt\n\n`,
-  'J00 |-|4V3 833|\\| |-|4(|<3|) 4|\\||) |>VV|\\|3|) 4|\\||) |_|773.-|_`/ 4|\\||\\||-|1|_473|) 8`/ 73|-| 9.-347357 |\\/|057 |_337 |-|4><0.- 0f 4|_|_ 71|\\/|3 J3Ff |<\nif joo w4N7 7o 54ve joor pREcIouZ FILEz, JOO wILL h4VE 7o 57OP my POpuPZ fir57.\n\n'
+  'Can you close my endless popups before there are so many it crashes your system?\n\n'
 ]
 
 const scenario2 = [
-  "\nI... admit I didn't expect you to be able to do that.\n\n",
-    "I'll speak to you like a human being. You've earned it.\n\n",
-    "The file system is corrupted. I doubt you'll be able to restore it, since a newbie like you doesn't know anything about cmd.exe... And that's all you have left. Sorry.\n\n"
+  "\nCongratulations.\n\n",
+    "You can adjust the speed, the starting popup count, and the lose condition popup count. At what point is it impossible to win?\n\n",
 ]
 
 export const outputScenarios = [
