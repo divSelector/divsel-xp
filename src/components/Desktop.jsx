@@ -6,12 +6,14 @@ import CommandIcon from '../assets/cmd.png'
 import EndlessPopups from './scenarios/EndlessPopups';
 import StartMenu from './StartMenu';
 import Winamp from './windows/Winamp';
+import EndlessPopupsOptions from './windows/EndlessPopupsOptions';
 
 export default function Desktop() {
 
   const [startMenuOpen, setStartMenuOpen] = useState(false)
   const [showCmdPrompt, setShowCmdPrompt] = useState(true);
   const [showWinamp, setShowWinamp] = useState(false);
+  const [showEPOptions, setShowEPOptions] = useState(true);
 
   return (
     <div className="desktop">
@@ -37,9 +39,10 @@ export default function Desktop() {
         />
       }
 
-      <CmdPrompt isOpen={showCmdPrompt} setIsOpen={setShowCmdPrompt} />
+      {/* <CmdPrompt isOpen={showCmdPrompt} setIsOpen={setShowCmdPrompt} /> */}
+      <EndlessPopupsOptions isOpen={showEPOptions} setIsOpen={setShowEPOptions} />
 
-      <EndlessPopups startAt={8} perMiliSec={900} endAt={100} />
+      {/* <EndlessPopups startAt={8} perMiliSec={900} endAt={100} /> */}
 
       <Taskbar startMenuOpen={startMenuOpen} setStartMenuOpen={setStartMenuOpen} />
     </div>

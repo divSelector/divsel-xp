@@ -256,12 +256,24 @@ textarea {
     text-transform: uppercase;
 }
 
+.options-container {
+    display: flex;
+    justify-content: center;
+}
+
+.options-item {
+    margin-right: 80px;
+}
+.options-item:last-child {
+    margin-right: 40px;
+}
+
+
 @media (orientation: landscape) {
     body {
         background-position: center bottom;
     }
 }
-
 
 
 @media screen and (max-width:825px) {
