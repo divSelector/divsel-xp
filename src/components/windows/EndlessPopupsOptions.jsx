@@ -54,7 +54,7 @@ export default function EndlessPopupsOptions({ isOpen, setIsOpen }) {
             {!isRunning && <Window
                 id="endless-popups-options"
                 className="window options"
-                windowTitle="endlesspopups.exe config"
+                windowTitle="endlesspopups.exe"
                 windowStyle={{
                     position: 'absolute',
                     left: position.x,
