@@ -2568,7 +2568,7 @@ wrappy@1:
 
 xp.css@^0.2.6:
   version "0.2.6"
-  resolved "https://registry.yarnpkg.com/xp.css/-/xp.css-0.2.6.tgz#ec78a023897a0da594e0d0100a931e7310a4f5cd"
+  resolved "https://registry.yarnpkg.com.css/-.css-0.2.6.tgz#ec78a023897a0da594e0d0100a931e7310a4f5cd"
   integrity sha512-v0qUB4wOvyXIMLNid5bIpm+0n5aL4i8wE5dqJH8LNVxE04PxUUxjwf2rNzengegUIK03XC4vbfLVCPAfMLtuqA==
 
 yallist@^3.0.2:

@@ -55,7 +55,7 @@ export default function Desktop() {
       <CmdPrompt isOpen={showCmdPrompt} setIsOpen={setShowCmdPrompt} />
       <EndlessPopupsOptions isOpen={showEPOptions} setIsOpen={setShowEPOptions} />
 
-      <EndlessPopups startAt={8} perMiliSec={2000} endAt={100} setShowOptions={setShowEPOptions} />
+      <EndlessPopups startAt={8} perMiliSec={2000} endAt={60} setShowOptions={setShowEPOptions} />
 
       <Taskbar startMenuOpen={startMenuOpen} setStartMenuOpen={setStartMenuOpen} />
     </div>

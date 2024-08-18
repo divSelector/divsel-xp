@@ -16,7 +16,8 @@ export default function Loading({ action }) {
         }, 10);
         setTimeout(function() {
             clearInterval(int)
-            navigate(`/xp/${action}`)
+            console.log(action)
+            navigate(`../${action}`)
           }, 2000);
         return () => {
             clearInterval(int)

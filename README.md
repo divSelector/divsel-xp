@@ -1,4 +1,4 @@
 # divsel-xp
 
-[https://divsel.neocities.org/xp](https://divsel.neocities.org/xp)
+[https://divsel.neocities.org](https://divsel.neocities.org)
 

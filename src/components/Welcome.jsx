@@ -9,8 +9,8 @@ export default function Welcome({msg}) {
 
     useEffect(() => {
         setTimeout(function() {
-            if (msg == 'welcome') navigate(`/xp/desktop`)
-            else if (msg == 'gameover') navigate(`/xp/loading`)
+            if (msg == 'welcome') navigate(`/desktop`)
+            else if (msg == 'gameover') navigate(`/loading`)
           }, 2000);
     }, [])
 

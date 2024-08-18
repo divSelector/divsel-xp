@@ -63,7 +63,7 @@ export default function EndlessPopups({ startAt, perMiliSec, endAt, setShowOptio
         if (!closedAllPopups) {
             if (Object.keys(windowPositions).length > endAt) {
                 setWindowPositions([])
-                navigate('/xp/gameover')
+                navigate('/gameover')
             }
 
             const interval = setInterval(() => {

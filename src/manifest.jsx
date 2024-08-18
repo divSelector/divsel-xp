@@ -31,8 +31,8 @@ import winPlayer from './assets/winPlayer.png'
 import winampIcon from './assets/winamp.png'
 
 export const backgroundImages = [
-    '/xp/welcome-long.png',
-    '/xp/windows-xp-wallpaper-bliss.png'
+    '/welcome-long.png',
+    '/windows-xp-wallpaper-bliss.png'
 ]
 
 export const assets = {

@@ -9,19 +9,19 @@ export default function Root() {
     <BrowserRouter>
       <ScenarioProvider>
         <Routes>
-          <Route path="/xp" element={
+          <Route path="/" element={
             <Loading action="welcome" />
           } />
-          <Route path="/xp/welcome" element={
+          <Route path="/welcome" element={
             <Welcome msg="welcome" />
           } />
-          <Route path="/xp/desktop" element={
+          <Route path="/desktop" element={
             <Desktop />
           } />
-          <Route path="/xp/gameover" element={
+          <Route path="/gameover" element={
             <Welcome msg="gameover" />
           } />
-          <Route path="/xp/loading" element={
+          <Route path="/loading" element={
             <Loading action="desktop" />
           } />
 
