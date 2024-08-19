@@ -1,4 +1,4 @@
-# divsel-xp
+# xp.goeshard.org
 
-[https://divsel.neocities.org](https://divsel.neocities.org)
+[https://xp.goeshard.org](xp.goeshard.org)
 
